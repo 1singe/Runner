@@ -1,0 +1,19 @@
+{
+    "name": "PGG.Editor",
+    "rootNamespace": "PGG.Editor",
+    "references": [
+        "GUID:ee8dfd83b8044836a9b4e36a9f475802",
+        "GUID:952ee666bba54fe4cbccc555934176c6"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

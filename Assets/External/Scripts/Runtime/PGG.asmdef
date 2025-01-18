@@ -1,0 +1,16 @@
+{
+    "name": "PGG",
+    "rootNamespace": "PGG",
+    "references": [
+        "GUID:952ee666bba54fe4cbccc555934176c6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

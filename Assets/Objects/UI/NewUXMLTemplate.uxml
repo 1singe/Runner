@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-wrap: wrap; align-self: center; align-items: center; justify-content: center;">
+        <ui:Vector2IntField label="Vector2Int" style="flex-basis: 300px; align-items: flex-start;" />
+        <ui:Vector2IntField label="Vector2Int" style="flex-basis: auto; align-self: center;" />
+    </ui:VisualElement>
+</ui:UXML>

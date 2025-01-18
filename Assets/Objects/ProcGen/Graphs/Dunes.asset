@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c875463d62459da631a5fe659ce634, type: 3}
+  m_Name: Dunes
+  m_EditorClassIdentifier: 
+  _nodes:
+  - rid: 2989802298128204008
+  - rid: 2989802311558889550
+  - rid: 2989802311558889641
+  - rid: 2989802311558889709
+  OutputNode:
+    ID: 96e9f72d-cc9f-4060-907f-a519b03d41ed
+    InputIDs:
+    - 4c404262-1ba5-452a-98bb-190c5ff7afe6
+    Position:
+      serializedVersion: 2
+      x: 50
+      y: 50
+      width: 0
+      height: 0
+    GraphAssetReference: {fileID: 11400000}
+  Connections:
+  - In:
+      NodeId: 4c404262-1ba5-452a-98bb-190c5ff7afe6
+      PortIndex: 1
+    Out:
+      NodeId: 800d3fe2-8c36-44e5-a733-6437357671be
+      PortIndex: 0
+  - In:
+      NodeId: 4c404262-1ba5-452a-98bb-190c5ff7afe6
+      PortIndex: 2
+    Out:
+      NodeId: 4bfaa188-7357-4794-a985-2de97d121563
+      PortIndex: 0
+  - In:
+      NodeId: 96e9f72d-cc9f-4060-907f-a519b03d41ed
+      PortIndex: 0
+    Out:
+      NodeId: 4c404262-1ba5-452a-98bb-190c5ff7afe6
+      PortIndex: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 2989802298128204008
+      type: {class: OutputNode, ns: PGG, asm: PGG}
+      data:
+        ID: 96e9f72d-cc9f-4060-907f-a519b03d41ed
+        InputIDs:
+        - 4c404262-1ba5-452a-98bb-190c5ff7afe6
+        Position:
+          serializedVersion: 2
+          x: 50
+          y: 50
+          width: 0
+          height: 0
+        GraphAssetReference: {fileID: 11400000}
+        Input: 0
+    - rid: 2989802311558889550
+      type: {class: Perlin, ns: PGG, asm: PGG}
+      data:
+        ID: 4bfaa188-7357-4794-a985-2de97d121563
+        InputIDs: []
+        Position:
+          serializedVersion: 2
+          x: -624
+          y: 257
+          width: 241
+          height: 194
+        GraphAssetReference: {fileID: 11400000}
+        _noise:
+          rid: 2989802311558889782
+        Frequency: 0.015
+        Amplitude: 10
+        Offset: {x: 0, y: 0}
+        Seed: 1337
+    - rid: 2989802311558889641
+      type: {class: Perlin, ns: PGG, asm: PGG}
+      data:
+        ID: 800d3fe2-8c36-44e5-a733-6437357671be
+        InputIDs: []
+        Position:
+          serializedVersion: 2
+          x: -571
+          y: -69
+          width: 241
+          height: 194
+        GraphAssetReference: {fileID: 11400000}
+        _noise:
+          rid: 2989802311558889783
+        Frequency: 0.005
+        Amplitude: 20
+        Offset: {x: 0, y: 0}
+        Seed: 1337
+    - rid: 2989802311558889709
+      type: {class: AddNode, ns: PGG, asm: PGG}
+      data:
+        ID: 4c404262-1ba5-452a-98bb-190c5ff7afe6
+        InputIDs:
+        - 800d3fe2-8c36-44e5-a733-6437357671be
+        - 4bfaa188-7357-4794-a985-2de97d121563
+        Position:
+          serializedVersion: 2
+          x: -171
+          y: 137
+          width: 0
+          height: 0
+        GraphAssetReference: {fileID: 11400000}
+        Inputs:
+        - 0
+        - 0
+    - rid: 2989802311558889782
+      type: {class: FastNoise, ns: , asm: PGG.Common}
+      data: 
+    - rid: 2989802311558889783
+      type: {class: FastNoise, ns: , asm: PGG.Common}
+      data: 

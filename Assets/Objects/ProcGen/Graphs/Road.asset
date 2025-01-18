@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c875463d62459da631a5fe659ce634, type: 3}
+  m_Name: Road
+  m_EditorClassIdentifier: 
+  _nodes:
+  - rid: 2989802342085820416
+  - rid: 2989802342085820417
+  OutputNode:
+    ID: 964ba010-6caf-47da-9d4c-ebaf51e43bfb
+    InputIDs:
+    - 6f23eb31-6e12-41b7-bf72-8756dcef8f01
+    Position:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    GraphAssetReference: {fileID: 11400000}
+  Connections:
+  - In:
+      NodeId: 964ba010-6caf-47da-9d4c-ebaf51e43bfb
+      PortIndex: 0
+    Out:
+      NodeId: 6f23eb31-6e12-41b7-bf72-8756dcef8f01
+      PortIndex: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 2989802342085820416
+      type: {class: OutputNode, ns: PGG, asm: PGG}
+      data:
+        ID: 964ba010-6caf-47da-9d4c-ebaf51e43bfb
+        InputIDs:
+        - 6f23eb31-6e12-41b7-bf72-8756dcef8f01
+        Position:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        GraphAssetReference: {fileID: 11400000}
+        Input: 0
+    - rid: 2989802342085820417
+      type: {class: Voronoi, ns: PGG, asm: PGG}
+      data:
+        ID: 6f23eb31-6e12-41b7-bf72-8756dcef8f01
+        InputIDs: []
+        Position:
+          serializedVersion: 2
+          x: -588
+          y: 0
+          width: 270.00003
+          height: 242.66666
+        GraphAssetReference: {fileID: 11400000}
+        _noise:
+          rid: 2989802342085820649
+        Frequency: 0.19
+        Amplitude: 10
+        Offset: {x: 0, y: 0}
+        Seed: 1337
+        DistanceFunction: 0
+        ReturnType: 6
+    - rid: 2989802342085820649
+      type: {class: FastNoise, ns: , asm: PGG.Common}
+      data: 
