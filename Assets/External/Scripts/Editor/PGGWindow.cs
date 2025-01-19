@@ -66,6 +66,7 @@ namespace PGG.Editor
         private void OnSave()
         {
             SaveChanges();
+            _currentGraph.Bake();
         }
 
 

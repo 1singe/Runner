@@ -63,13 +63,13 @@ MonoBehaviour:
           height: 242.66666
         GraphAssetReference: {fileID: 11400000}
         _noise:
-          rid: 2989802342085820649
+          rid: 2989802344121630968
         Frequency: 0.19
         Amplitude: 10
         Offset: {x: 0, y: 0}
         Seed: 1337
         DistanceFunction: 0
         ReturnType: 6
-    - rid: 2989802342085820649
+    - rid: 2989802344121630968
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 

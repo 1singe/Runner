@@ -71,13 +71,13 @@ MonoBehaviour:
         InputIDs: []
         Position:
           serializedVersion: 2
-          x: -624
-          y: 257
-          width: 241
-          height: 194
+          x: -584.6666
+          y: 245.33334
+          width: 245.33331
+          height: 200
         GraphAssetReference: {fileID: 11400000}
         _noise:
-          rid: 2989802311558889782
+          rid: 2989802344121631643
         Frequency: 0.015
         Amplitude: 10
         Offset: {x: 0, y: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
           height: 194
         GraphAssetReference: {fileID: 11400000}
         _noise:
-          rid: 2989802311558889783
+          rid: 2989802344121631644
         Frequency: 0.005
         Amplitude: 20
         Offset: {x: 0, y: 0}
@@ -110,16 +110,16 @@ MonoBehaviour:
         Position:
           serializedVersion: 2
           x: -171
-          y: 137
-          width: 0
-          height: 0
+          y: 26
+          width: 96
+          height: 166
         GraphAssetReference: {fileID: 11400000}
         Inputs:
         - 0
         - 0
-    - rid: 2989802311558889782
+    - rid: 2989802344121631643
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 
-    - rid: 2989802311558889783
+    - rid: 2989802344121631644
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 

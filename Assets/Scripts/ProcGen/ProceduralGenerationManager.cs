@@ -46,7 +46,7 @@ public class ProceduralGenerationManager : MonoBehaviour
 
     public static float SampleHeightAtPos(Vector2 worldPos)
     {
-        return Instance.GenerationAsset.SampleGraphAtPos(worldPos.x, worldPos.y);
+        return Generated_GenerationStatics.SampleDunes(worldPos.x, worldPos.y); //Instance.GenerationAsset.SampleGraphAtPos(worldPos.x, worldPos.y);
     }
 
     public void Editor_GenerateSingleChunk(int seed)

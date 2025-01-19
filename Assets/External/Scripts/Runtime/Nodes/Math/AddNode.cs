@@ -13,14 +13,9 @@ namespace PGG
         public override float ProcessSelf(float x, float y)
         {
             float sum = 0f;
-            if (InputIDs == null)
+            for (int i = 0; i < InputIDs.Count; i++)
             {
-                return sum;
-            }
-
-            foreach (string ID in InputIDs)
-            {
-                sum += ProcessNode(ID, x, y);
+                sum += ProcessNode(i, x, y);
             }
 
             return sum;
@@ -29,6 +24,11 @@ namespace PGG
         public override void AddInput()
         {
             Inputs.Add(0f);
+        }
+
+        public override string BakeProcess(string Input)
+        {
+            return "(" + BakeProcessNext(0, Input) + " + " + BakeProcessNext(1, Input) + ")";
         }
     }
 }

@@ -10,5 +10,10 @@ namespace PGG
             base.Init();
             _noise.SetNoiseType(FastNoise.NoiseType.Perlin);
         }
+
+        public override string BakeProcess(string Input)
+        {
+            return base.BakeProcess(Input);
+        }
     }
 }

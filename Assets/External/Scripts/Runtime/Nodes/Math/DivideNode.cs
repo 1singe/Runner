@@ -13,12 +13,12 @@ namespace PGG
 
         public override float ProcessSelf(float x, float y)
         {
-            if (InputIDs == null || InputIDs.Count < 2)
-            {
-                return 0f;
-            }
+            return ProcessNode(0, x, y) / ProcessNode(1, x, y);
+        }
 
-            return ProcessNode(InputIDs[0], x, y) / ProcessNode(InputIDs[1], x, y);
+        public override string BakeProcess(string Input)
+        {
+            return "(" + BakeProcessNext(0, Input) + " / " + BakeProcessNext(1, Input) + ")";
         }
     }
 }

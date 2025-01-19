@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
 
 namespace PGG
 {
@@ -29,6 +31,19 @@ namespace PGG
         public override float ProcessSelf(float x, float y)
         {
             return _noise.GetNoise(x + Offset.x, y + Offset.y) * Amplitude;
+        }
+
+        public override void BakeInit(ref List<string> InitLines)
+        {
+            InitLines.Add("SFastNoise noise" + _id + "= new SFastNoise();");
+            InitLines.Add("noise" + _id + ".SetFrequency(" + Frequency.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
+            InitLines.Add("noise" + _id + ".SetSeed(" + Seed + ");");
+            InitLines.Add("noise" + _id + ".SetNoiseType(SFastNoise.NoiseType.Perlin);");
+        }
+
+        public override string BakeProcess(string Input)
+        {
+            return "noise" + _id + ".GetNoise(x + " + Offset.x.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f, y + " + Offset.y.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f) * " + Amplitude.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f";
         }
     }
 }

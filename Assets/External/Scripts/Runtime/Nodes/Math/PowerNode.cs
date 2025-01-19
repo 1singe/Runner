@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using UnityEngine;
 
 namespace PGG
 {
@@ -13,12 +14,12 @@ namespace PGG
 
         public override float ProcessSelf(float x, float y)
         {
-            if (InputIDs == null || InputIDs.Count < 1)
-            {
-                return 1f;
-            }
+            return Mathf.Pow(ProcessNode(0, x, y), Pow);
+        }
 
-            return Mathf.Pow(ProcessNode(InputIDs[0], x, y), Pow);
+        public override string BakeProcess(string Input)
+        {
+            return "(Mathf.Pow(" + BakeProcessNext(0, Input) + ", " + Pow.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f));";
         }
     }
 }

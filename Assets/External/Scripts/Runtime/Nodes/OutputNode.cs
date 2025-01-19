@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace PGG
 {
@@ -8,16 +9,15 @@ namespace PGG
         [SerializeField] [Input(false, typeof(float), true, false)]
         public float Input;
 
-
         public override float ProcessSelf(float x, float y)
         {
-            float value = 0f;
-            if (InputIDs != null && InputIDs.Count > 0)
-            {
-                value = ProcessNode(InputIDs[0], x, y);
-            }
-
+            float value = ProcessNode(0, x, y);
             return value;
+        }
+
+        public override string BakeProcess(string Input)
+        {
+            return Input + "return " + GetNextNode(0).BakeProcess(Input) + ";";
         }
     }
 }

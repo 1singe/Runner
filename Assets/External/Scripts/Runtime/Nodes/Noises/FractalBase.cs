@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
 
 namespace PGG
 {
@@ -23,6 +25,15 @@ namespace PGG
             _noise.SetFractalGain(Gain);
             _noise.SetFractalLacunarity(Lacunarity);
             _noise.SetFractalOctaves(Octaves);
+        }
+
+        public override void BakeInit(ref List<string> InitLines)
+        {
+            base.BakeInit(ref InitLines);
+            InitLines.Add("noise" + _id + ".SetFractalType(" + FractalType + ");");
+            InitLines.Add("noise" + _id + ".SetFractalGain(" + Gain.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
+            InitLines.Add("noise" + _id + ".SetFractalLacunarity(" + Lacunarity.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
+            InitLines.Add("noise" + _id + ".SetFractalOctaves(" + Octaves + ");");
         }
     }
 }

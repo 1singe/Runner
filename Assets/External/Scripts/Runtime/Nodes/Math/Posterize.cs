@@ -23,7 +23,7 @@ namespace PGG
             {
             }
 
-            return Mathf.Min(ProcessNode(InputIDs[0], x, y), Steps[0]);
+            return Mathf.Min(ProcessNode(0, x, y), Steps[0]);
         }
     }
 }

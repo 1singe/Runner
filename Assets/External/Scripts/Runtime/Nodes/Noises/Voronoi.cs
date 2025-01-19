@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace PGG
 {
@@ -17,6 +18,14 @@ namespace PGG
             _noise.SetNoiseType(FastNoise.NoiseType.Cellular);
             _noise.SetCellularDistanceFunction(DistanceFunction);
             _noise.SetCellularReturnType(ReturnType);
+        }
+
+        public override void BakeInit(ref List<string> InitLines)
+        {
+            base.BakeInit(ref InitLines);
+            InitLines.Add("noise" + _id + ".SetNoiseType(SFastNoise.NoiseType.Cellular);");
+            InitLines.Add("noise" + _id + ".SetCellularDistanceFunction( + " + DistanceFunction + ");");
+            InitLines.Add("noise" + _id + ".SetCellularReturnType(" + ReturnType + ");");
         }
     }
 }
