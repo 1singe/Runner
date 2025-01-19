@@ -30,7 +30,7 @@ namespace PGG
         public override void BakeInit(ref List<string> InitLines)
         {
             base.BakeInit(ref InitLines);
-            InitLines.Add("noise" + _id + ".SetFractalType(" + FractalType + ");");
+            InitLines.Add("noise" + _id + ".SetFractalType(SFastNoise.FractalType." + FractalType + ");");
             InitLines.Add("noise" + _id + ".SetFractalGain(" + Gain.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
             InitLines.Add("noise" + _id + ".SetFractalLacunarity(" + Lacunarity.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
             InitLines.Add("noise" + _id + ".SetFractalOctaves(" + Octaves + ");");

@@ -24,8 +24,8 @@ namespace PGG
         {
             base.BakeInit(ref InitLines);
             InitLines.Add("noise" + _id + ".SetNoiseType(SFastNoise.NoiseType.Cellular);");
-            InitLines.Add("noise" + _id + ".SetCellularDistanceFunction( + " + DistanceFunction + ");");
-            InitLines.Add("noise" + _id + ".SetCellularReturnType(" + ReturnType + ");");
+            InitLines.Add("noise" + _id + ".SetCellularDistanceFunction(SFastNoise.CellularDistanceFunction." + DistanceFunction + ");");
+            InitLines.Add("noise" + _id + ".SetCellularReturnType(SFastNoise.CellularReturnType." + ReturnType + ");");
         }
     }
 }
