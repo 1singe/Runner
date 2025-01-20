@@ -11,6 +11,10 @@ namespace Atmosphere
         public RenderTexture RuntimeRenderTexture;
         public Material Chrome;
 
+        public float RefreshRate = 1f;
+
+        private float time = 0f;
+
         private void Start()
         {
             AssignRenderTexture();
@@ -32,6 +36,18 @@ namespace Atmosphere
                 ReflectionProbe.realtimeTexture = RuntimeRenderTexture = new RenderTexture(Desc);
                 Chrome.SetTexture("_Cubemap", RuntimeRenderTexture);
             }
+        }
+
+
+        public void Update()
+        {
+            time += Time.deltaTime;
+
+            if (time < RefreshRate)
+                return;
+
+            ReflectionProbe.RenderProbe();
+            time = 0f;
         }
     }
 }

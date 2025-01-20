@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PGG;
 using Unity.Burst;
 using Unity.Collections;
@@ -8,57 +9,138 @@ using Unity.Mathematics;
 
 namespace ProcGen.Jobs
 {
-    [BurstCompile]
     public class ParallelGenerator : MonoBehaviour
     {
+        public struct ChunkData
+        {
+            public Vector3 ChunkWorldPos;
+            public JobHandle Handle;
+            public NativeMeshData MeshData;
+        }
+
         public ProceduralGenerationManager Manager;
-        public JobHandle handle;
+        private Dictionary<Vector2Int, ChunkData> _chunkDataDictionary;
 
         public void Awake()
         {
             Manager = GetComponent<ProceduralGenerationManager>();
+            _chunkDataDictionary = new Dictionary<Vector2Int, ChunkData>();
         }
 
-        public JobHandle GenerateChunk(Vector2 chunkPos, int LOD)
+        public void GenerateChunk(Vector2Int chunkCoords, Vector3 position3D, int LOD)
         {
-            NativeArray<float3> vertices = new NativeArray<float3>(Manager.ChunkSize * Manager.ChunkSize, Allocator.Temp);
-
-            var job = new ComputeHeightJob
+            ChunkData data = new ChunkData()
             {
-                Vertices = vertices,
-                size = Manager.ChunkSize,
-                ChunkWorldPos = chunkPos,
-                Simplification = LOD <= 0 ? 1 : LOD * 2,
+                ChunkWorldPos = position3D,
+                MeshData = new NativeMeshData(Manager.ChunkSize, LOD, Allocator.TempJob)
             };
-            JobHandle handle = job.Schedule(vertices.Length, 32);
 
-            vertices.Dispose();
+            ComputeHeightJob job = new ComputeHeightJob
+            {
+                MeshData = data.MeshData,
+                ChunkWorldPos = new float2 { x = position3D.x, y = position3D.z }
+            };
 
-            return handle;
+            data.Handle = job.Schedule(data.MeshData.Vertices.Length, 64);
+
+            _chunkDataDictionary.Add(chunkCoords, data);
         }
 
+        public void LateUpdate()
+        {
+            foreach (KeyValuePair<Vector2Int, ChunkData> data in _chunkDataDictionary)
+            {
+                JobHandle handle = data.Value.Handle;
+                if (!handle.IsCompleted)
+                    continue;
+
+                handle.Complete();
+                Manager.OnMapDataReceived(data.Value);
+                data.Value.MeshData.Dispose();
+            }
+        }
+
+
+        [BurstCompile]
         public struct ComputeHeightJob : IJobParallelFor
         {
-            public NativeArray<float3> Vertices;
-            [ReadOnly] public int size;
+            [NativeDisableParallelForRestriction] public NativeMeshData MeshData;
             [ReadOnly] public float2 ChunkWorldPos;
-            [ReadOnly] public int Simplification;
 
             public void Execute(int index)
             {
-                int y = (index / size) * size;
-                int x = index % size;
+                int x = index % MeshData.VerticesByLine;
+                int y = index / MeshData.VerticesByLine;
+
+                if (x % MeshData.Simplification != 0 && y % MeshData.Simplification != 0)
+                    return;
+
                 float xPos = ChunkWorldPos.x + x;
                 float zPos = ChunkWorldPos.y + y;
-                int verticesPerLine = (size - 1) / Simplification + 1;
 
-                Vertices[index] = new float3
+                MeshData.Vertices[index] = new float3
                 {
-                    x = xPos,
-                    y = Generated_GenerationStatics.SampleDunes(ChunkWorldPos.x + x, ChunkWorldPos.y + y),
-                    z = zPos
+                    x = x,
+                    y = Generated_GenerationStatics.SampleDunes(xPos, zPos),
+                    z = y
                 };
+
+                MeshData.UVs[index] = new float2
+                {
+                    x = x / (float)MeshData.Size,
+                    y = y / (float)MeshData.Size,
+                };
+
+                if (x < MeshData.Size - 1 && y < MeshData.Size - 1)
+                {
+                    MeshData.CreateQuad(index * 6, index, index + MeshData.VerticesByLine, index + MeshData.VerticesByLine + 1, index + 1);
+                }
             }
+        }
+    }
+
+    public struct NativeMeshData : IDisposable
+    {
+        [ReadOnly] public int Size;
+        [ReadOnly] public int Simplification;
+        [ReadOnly] public int VerticesByLine;
+        public NativeArray<float3> Vertices;
+        public NativeArray<float2> UVs;
+        [NativeDisableParallelForRestriction] public NativeArray<int> Triangles;
+
+        public NativeMeshData(int size, int LOD, Allocator allocator)
+        {
+            Size = size;
+            Simplification = LOD <= 0 ? 1 : LOD * 2;
+            VerticesByLine = (Size - 1) / Simplification + 1;
+
+            Vertices = new NativeArray<float3>(VerticesByLine * VerticesByLine, allocator);
+            UVs = new NativeArray<float2>(VerticesByLine * VerticesByLine, allocator);
+            Triangles = new NativeArray<int>((VerticesByLine - 1) * (VerticesByLine - 1) * 6, allocator);
+        }
+
+        public void Dispose()
+        {
+            Vertices.Dispose();
+            UVs.Dispose();
+            Triangles.Dispose();
+        }
+
+        public void CreateTriangle(int index, int a, int b, int c)
+        {
+            Triangles[index] = a;
+            Triangles[index + 1] = b;
+            Triangles[index + 2] = c;
+        }
+
+        public void CreateQuad(int index, int a, int b, int c, int d)
+        {
+            Triangles[index] = a;
+            Triangles[index + 1] = b;
+            Triangles[index + 2] = c;
+            Triangles[index + 3] = a;
+            Triangles[index + 4] = c;
+            Triangles[index + 5] = d;
         }
     }
 }
