@@ -80,7 +80,7 @@ public static class Noise
 
     public static float SampleHeightAtPos(ProceduralGenerationManager manager, Vector2 worldPos, GraphAsset generationAsset)
     {
-        return generationAsset.SampleGraphAtPos(worldPos.x + manager.Offset.x, worldPos.y + manager.Offset.y);
+        return Generated_GenerationStatics.SampleDunes(worldPos.x + manager.Offset.x, worldPos.y + manager.Offset.y); //generationAsset.SampleGraphAtPos(worldPos.x + manager.Offset.x, worldPos.y + manager.Offset.y);
     }
 
     public static float SampleHeightAtPos(Vector2 worldPos, GraphAsset generationAsset)
@@ -125,7 +125,6 @@ public static class Noise
         ProceduralGenerationManager ProceduralManager = ProceduralGenerationManager.Instance;
         bool FoundManager = ProceduralManager;
 
-        generationAsset.Cook();
         float[,] noiseMap = new float [chunkSize, chunkSize];
 
         for (int y = 0; y < chunkSize; y++)

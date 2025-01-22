@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace PGG
@@ -20,12 +21,22 @@ namespace PGG
             _noise.SetCellularReturnType(ReturnType);
         }
 
-        public override void BakeInit(ref List<string> InitLines)
+        public override float ProcessSelf(float x, float y)
+        {
+            return _noise.GetCellular(x, y);
+        }
+
+        public override string BakeProcess(string Input)
+        {
+            return "Noise" + _id + ".GetCellular(x + " + Offset.x.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f, y + " + Offset.y.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f) * " + Amplitude.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f";
+        }
+
+        public override void BakeInit(ref Dictionary<string, List<string>> InitLines)
         {
             base.BakeInit(ref InitLines);
-            InitLines.Add("noise" + _id + ".SetNoiseType(SFastNoise.NoiseType.Cellular);");
-            InitLines.Add("noise" + _id + ".SetCellularDistanceFunction(SFastNoise.CellularDistanceFunction." + DistanceFunction + ");");
-            InitLines.Add("noise" + _id + ".SetCellularReturnType(SFastNoise.CellularReturnType." + ReturnType + ");");
+            InitLines[_id].Add("noise" + _id + ".SetNoiseType(FastNoise.NoiseType.Cellular);");
+            InitLines[_id].Add("noise" + _id + ".SetCellularDistanceFunction(FastNoise.CellularDistanceFunction." + DistanceFunction + ");");
+            InitLines[_id].Add("noise" + _id + ".SetCellularReturnType(FastNoise.CellularReturnType." + ReturnType + ");");
         }
     }
 }

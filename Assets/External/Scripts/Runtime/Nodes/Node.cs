@@ -29,10 +29,6 @@ namespace PGG
             _id = ID.Replace('-', '_');
         }
 
-        public virtual void AddInput()
-        {
-        }
-
         public virtual void Init()
         {
         }
@@ -49,7 +45,9 @@ namespace PGG
 
         public virtual float ProcessNode(int index, float x, float y)
         {
-            return GetNextNode(index).ProcessSelf(x, y);
+            if (GetNextNode(index) != null)
+                return GetNextNode(index).ProcessSelf(x, y);
+            return 0f;
         }
 
         public virtual float ProcessSelf(float x, float y)
@@ -57,7 +55,7 @@ namespace PGG
             return 0f;
         }
 
-        public virtual void BakeInit(ref List<string> InitLines)
+        public virtual void BakeInit(ref Dictionary<string, List<string>> InitLines)
         {
         }
 
@@ -70,7 +68,13 @@ namespace PGG
         {
             if (InputIDs != null && index < InputIDs.Count)
             {
-                return GraphAssetReference.NodeDictionary[InputIDs[index]];
+                string id = InputIDs[index];
+                if (GraphAssetReference != null && GraphAssetReference.NodeDictionary != null && GraphAssetReference.NodeDictionary.ContainsKey(id))
+                {
+                    return GraphAssetReference.NodeDictionary[InputIDs[index]];
+                }
+
+                return null;
             }
 
             return null;

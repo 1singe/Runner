@@ -11,10 +11,10 @@ namespace PGG
             _noise.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         }
 
-        public override void BakeInit(ref List<string> InitLines)
+        public override void BakeInit(ref Dictionary<string, List<string>> InitLines)
         {
             base.BakeInit(ref InitLines);
-            InitLines.Add("noise" + _id + ".SetNoiseType(SFastNoise.NoiseType.CubicFractal);");
+            InitLines[_id].Add("noise" + _id + ".SetNoiseType(FastNoise.NoiseType.CubicFractal);");
         }
     }
 }

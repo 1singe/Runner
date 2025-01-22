@@ -6,7 +6,7 @@ namespace PGG
     [NodeInfo("Power", "Math/Power")]
     public class PowerNode : Node
     {
-        [SerializeField] [Input(false, typeof(float))]
+        [SerializeField] [Input(false, typeof(float), true, false)]
         public float Input = 0f;
 
         [SerializeField] [Input(false, typeof(float), false, true)]

@@ -35,3 +35,27 @@ public class ProcGenEditor : Editor
         }
     }
 }
+
+[CustomEditor(typeof(EditorGenerationManager))]
+public class EditorGenerationManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        EditorGenerationManager manager = (EditorGenerationManager)target;
+
+        if (GUILayout.Button(manager.Attached ? "Detach" : "Attach"))
+        {
+            manager.Attached = !manager.Attached;
+            if (manager.Attached)
+            {
+                manager.OnAttached();
+            }
+            else
+            {
+                manager.OnDetached();
+            }
+        }
+
+        base.OnInspectorGUI();
+    }
+}

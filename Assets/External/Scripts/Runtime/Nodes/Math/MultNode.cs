@@ -6,24 +6,21 @@ namespace PGG
     [NodeInfo("Multiply", "Math/Multiply")]
     public class MultNode : Node
     {
-        [SerializeField] [Input(true, typeof(float))]
-        public List<float> Inputs = new List<float>(2) { 1f, 1f };
+        [SerializeField] [Input(false, typeof(float), true, false)]
+        public float A = 1f;
+
+        [SerializeField] [Input(false, typeof(float), true, false)]
+        public float B = 1f;
 
         public override float ProcessSelf(float x, float y)
         {
             float value = 1f;
-            for (int i = 0; i < InputIDs.Count; i++)
+            if (InputIDs.Count >= 2)
             {
-                value *= ProcessNode(i, x, y);
+                value = ProcessNode(0, x, y) * ProcessNode(1, x, y);
             }
 
             return value;
-        }
-
-
-        public override void AddInput()
-        {
-            Inputs.Add(1f);
         }
 
         public override string BakeProcess(string Input)

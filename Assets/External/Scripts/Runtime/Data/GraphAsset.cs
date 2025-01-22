@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Win32.SafeHandles;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PGG
 {
@@ -22,7 +24,9 @@ namespace PGG
         public List<Node> Nodes => _nodes;
 
         private int _indent = 0;
-        private List<string> InitLines;
+        private Dictionary<string, List<string>> InitLines;
+
+        [HideInInspector] public UnityEvent OnGraphCooked;
 
         public GraphAsset()
         {
@@ -30,7 +34,7 @@ namespace PGG
             Connections = new List<Connection>();
             OutputNode = new OutputNode();
             _nodes.Add(OutputNode);
-            InitLines = new List<string>();
+            InitLines = new Dictionary<string, List<string>>();
         }
 
         public void Cook()
@@ -57,7 +61,7 @@ namespace PGG
         public bool Bake()
         {
             string filePath = OpenGeneratedFile();
-            InitLines = new List<string>();
+            InitLines = new Dictionary<string, List<string>>();
 
             File.WriteAllText(filePath, "public partial struct Generated_GenerationStatics" + ScopeIn() + GenerateContent() + ScopeOut());
 
@@ -74,18 +78,26 @@ namespace PGG
                 node.BakeInit(ref InitLines);
             }
 
-            return "public static float Sample" + name + "(float x, float y)" + ScopeIn() + GenerateInit() + OutputNode.BakeProcess("") + ScopeOut();
+            return GenerateInit() + "public static float Sample" + name + "(float x, float y)" + ScopeIn() + OutputNode.BakeProcess("") + ScopeOut();
         }
 
         private string GenerateInit()
         {
-            string ret = "";
-            foreach (var line in InitLines)
+            string init = "";
+            foreach (var entry in InitLines)
             {
-                ret += line + JumpLine();
+                init += "private static readonly FastNoise Noise" + entry.Key + " = InitNoise" + entry.Key + "();" + JumpLine() + JumpLine();
+                init += "public static FastNoise InitNoise" + entry.Key + "()" + ScopeIn();
+                foreach (var line in entry.Value)
+                {
+                    init += line + JumpLine();
+                }
+
+                init += JumpLine();
+                init += "return noise" + entry.Key + ";" + ScopeOut() + JumpLine();
             }
 
-            return ret;
+            return init;
         }
 
 
@@ -134,14 +146,14 @@ namespace PGG
             return Application.dataPath + outerFolderPath + "Generated_" + name + ".cs";
         }
 
-        public MinMaxHeightMap ProcessGraph(Node node)
+        public MinMaxHeightMap ProcessGraph(Node node, int Size = TEXREZ, float offsetX = 0f, float offsetY = 0f)
         {
-            MinMaxHeightMap heightMap = new MinMaxHeightMap(TEXREZ);
-            for (int y = 0; y < TEXREZ; y++)
+            MinMaxHeightMap heightMap = new MinMaxHeightMap(Size);
+            for (int y = 0; y < Size; y++)
             {
-                for (int x = 0; x < TEXREZ; x++)
+                for (int x = 0; x < Size; x++)
                 {
-                    float value = node.ProcessSelf(x, y);
+                    float value = node.ProcessSelf(x + offsetX, y + offsetY);
                     if (value > heightMap.Max)
                         heightMap.Max = value;
                     if (value < heightMap.Min)
@@ -152,6 +164,7 @@ namespace PGG
 
             return heightMap;
         }
+
 
         public float SampleGraphAtPos(float x, float y)
         {

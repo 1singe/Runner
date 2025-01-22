@@ -43,8 +43,6 @@ namespace PGG.Editor
 
         public void CreateInputPorts(InputAttribute inputAttributeInfo, SerializedProperty property)
         {
-            // Todo multi stuff
-
             if (inputAttributeInfo.MultiInput)
             {
                 List<SerializedProperty> properties = FetchEnumerableInnerProperties(property);
@@ -57,11 +55,6 @@ namespace PGG.Editor
             {
                 CreateInputPort(inputAttributeInfo, property);
             }
-        }
-
-        private void CreateAdditionalInputPort()
-        {
-            Node.AddInput();
         }
 
         private void CreateInputPort(InputAttribute inputAttributeInfo, SerializedProperty property)

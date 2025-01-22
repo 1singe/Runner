@@ -131,7 +131,7 @@ public class MotorCycleController : MonoBehaviour
 
         float samplePosX = transform.position.x;
         float samplePosY = transform.position.z;
-        float groundHeight = ProceduralGenerationManager.Instance.GenerationAsset.SampleGraphAtPos(samplePosX, samplePosY);
+        float groundHeight = Generated_GenerationStatics.SampleDunes(samplePosX, samplePosY);
 
         groundDist = Mathf.Max(transform.position.y - groundHeight, 0);
         groundProjection = new Vector3(transform.position.x, groundHeight, transform.position.z);
@@ -151,15 +151,15 @@ public class MotorCycleController : MonoBehaviour
 
             // Center
             Vector2 aXY = new Vector2(samplePosX + sampleDistance, samplePosY); // 0 deg
-            adjacentGroundHeights[0] = ProceduralGenerationManager.SampleHeightAtPos(aXY);
+            adjacentGroundHeights[0] = Generated_GenerationStatics.SampleDunes(aXY.x, aXY.y);
             Vector3 a = new Vector3(aXY.x, adjacentGroundHeights[0], aXY.y);
 
             Vector2 bXY = new Vector2(samplePosX + Mathf.Cos(Mathf.Deg2Rad * 120) * sampleDistance, samplePosY + Mathf.Sin(Mathf.Deg2Rad * 120) * sampleDistance); // 120 deg
-            adjacentGroundHeights[1] = ProceduralGenerationManager.SampleHeightAtPos(bXY);
+            adjacentGroundHeights[1] = Generated_GenerationStatics.SampleDunes(bXY.x, bXY.y);
             Vector3 b = new Vector3(bXY.x, adjacentGroundHeights[1], bXY.y);
 
             Vector2 cXY = new Vector2(samplePosX + Mathf.Cos(Mathf.Deg2Rad * 240) * sampleDistance, samplePosY + Mathf.Sin(Mathf.Deg2Rad * 240) * sampleDistance); // 240 deg
-            adjacentGroundHeights[2] = ProceduralGenerationManager.SampleHeightAtPos(cXY);
+            adjacentGroundHeights[2] = Generated_GenerationStatics.SampleDunes(cXY.x, cXY.y);
             Vector3 c = new Vector3(cXY.x, adjacentGroundHeights[2], cXY.y);
 
             Debug.DrawRay(a, Vector3.up * 0.01f, Color.green);

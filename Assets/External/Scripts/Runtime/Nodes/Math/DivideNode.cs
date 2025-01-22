@@ -5,10 +5,10 @@ namespace PGG
     [NodeInfo("Divide", "Math/Divide")]
     public class DivideNode : Node
     {
-        [SerializeField] [Input(false, typeof(float))]
+        [SerializeField] [Input(false, typeof(float), true, false)]
         public float A = 0f;
 
-        [SerializeField] [Input(false, typeof(float))]
+        [SerializeField] [Input(false, typeof(float), true, false)]
         public float B = 1f;
 
         public override float ProcessSelf(float x, float y)

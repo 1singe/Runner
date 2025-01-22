@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -13,6 +12,7 @@ namespace PGG.Editor
         public GraphAsset _currentGraph { get; private set; }
         [SerializeField] private SerializedObject _serializedObject;
         [SerializeField] private PGGView _currentView;
+        [SerializeField] private PGGMainPreview _mainPreview;
         private PGGEditorNode _selectedNode;
 
 
@@ -67,6 +67,7 @@ namespace PGG.Editor
         {
             SaveChanges();
             _currentGraph.Bake();
+            UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation();
         }
 
 
@@ -88,7 +89,6 @@ namespace PGG.Editor
             {
                 base.SaveChanges();
                 _currentGraph.Cook();
-                //_currentGraph.BakeGraph();
 
                 _currentView.EditorNodes.ForEach((e) => e.DrawPreview());
             }
@@ -111,7 +111,6 @@ namespace PGG.Editor
             {
                 while (_currentGraph.Nodes.Count > 1)
                 {
-                    //TODO Optim
                     _currentGraph.Nodes.RemoveAll((node) => node.GetType() == typeof(OutputNode));
                     _currentGraph.Nodes.Add(new OutputNode());
                 }
@@ -124,8 +123,10 @@ namespace PGG.Editor
         {
             _serializedObject = new SerializedObject(_currentGraph);
             _currentView = new PGGView(_serializedObject, this);
+            _mainPreview = new PGGMainPreview(this);
             _currentView.graphViewChanged += OnChange;
             rootVisualElement.Add(_currentView);
+            _currentView.Add(_mainPreview);
         }
 
         private GraphViewChange OnChange(GraphViewChange graphViewChange)
@@ -139,7 +140,6 @@ namespace PGG.Editor
         {
             EditorUtility.SetDirty(_currentGraph);
             _currentGraph.Cook();
-            //_currentGraph.BakeGraph();
 
             _currentView.EditorNodes.ForEach((e) => e.DrawPreview());
         }

@@ -6,24 +6,21 @@ namespace PGG
     [NodeInfo("Subtract", "Math/Subtract")]
     public class SubtractNode : Node
     {
-        [SerializeField] [Input(true, typeof(float))]
-        public List<float> Inputs = new List<float>(2) { 0f, 0f };
+        [SerializeField] [Input(false, typeof(float), true, false)]
+        public float A = 0f;
+
+        [SerializeField] [Input(false, typeof(float), true, false)]
+        public float B = 0f;
 
         public override float ProcessSelf(float x, float y)
         {
             float sum = 0f;
-
-            for (int i = 0; i < InputIDs.Count; i++)
+            if (InputIDs.Count >= 2)
             {
-                sum -= ProcessNode(i, x, y);
+                sum = ProcessNode(0, x, y) - ProcessNode(1, x, y);
             }
 
             return sum;
-        }
-
-        public override void AddInput()
-        {
-            Inputs.Add(0f);
         }
 
         public override string BakeProcess(string Input)

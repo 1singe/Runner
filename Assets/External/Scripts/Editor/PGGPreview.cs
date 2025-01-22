@@ -38,6 +38,11 @@ namespace PGG.Editor
 
         public void WriteToImage(MinMaxHeightMap heightMap)
         {
+            if (_previewImage == null)
+            {
+                _previewImage = new Image { name = "preview", image = PreviewTexture, scaleMode = ScaleMode.ScaleToFit };
+            }
+
             Color[] byteArray = new Color[TEXREZ * TEXREZ];
             float min = heightMap.Min;
             float max = heightMap.Max;

@@ -126,7 +126,7 @@ namespace ProcGen
 
                 Chunk currentChunk = Instantiate(ProceduralGenerationManager.Instance.ChunkPrefab, pos3D, Quaternion.identity, ProceduralGenerationManager.Instance.ChunksHolder.transform);
 
-                currentChunk.CreateMesh(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(generator.ChunkSize, generator.GenerationAsset, generator.internSeed, ProceduralGenerationManager.Instance.Offset, chunkPos), generator.LOD));
+                currentChunk.CreateMesh(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(generator.ChunkSize, generator.GenerationAsset, generator.internSeed, ProceduralGenerationManager.Instance.Offset, chunkPos), generator.LOD, ProceduralGenerationManager.Instance.ChunkSize));
 
                 return currentChunk;
             }

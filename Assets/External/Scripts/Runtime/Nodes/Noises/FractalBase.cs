@@ -27,13 +27,13 @@ namespace PGG
             _noise.SetFractalOctaves(Octaves);
         }
 
-        public override void BakeInit(ref List<string> InitLines)
+        public override void BakeInit(ref Dictionary<string, List<string>> InitLines)
         {
             base.BakeInit(ref InitLines);
-            InitLines.Add("noise" + _id + ".SetFractalType(SFastNoise.FractalType." + FractalType + ");");
-            InitLines.Add("noise" + _id + ".SetFractalGain(" + Gain.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
-            InitLines.Add("noise" + _id + ".SetFractalLacunarity(" + Lacunarity.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
-            InitLines.Add("noise" + _id + ".SetFractalOctaves(" + Octaves + ");");
+            InitLines[_id].Add("noise" + _id + ".SetFractalType(FastNoise.FractalType." + FractalType + ");");
+            InitLines[_id].Add("noise" + _id + ".SetFractalGain(" + Gain.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
+            InitLines[_id].Add("noise" + _id + ".SetFractalLacunarity(" + Lacunarity.ToString(CultureInfo.InvariantCulture).Replace(',', '.') + "f);");
+            InitLines[_id].Add("noise" + _id + ".SetFractalOctaves(" + Octaves + ");");
         }
     }
 }

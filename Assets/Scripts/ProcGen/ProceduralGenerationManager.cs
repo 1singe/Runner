@@ -46,7 +46,7 @@ public class ProceduralGenerationManager : MonoBehaviour
 
     public static float SampleHeightAtPos(Vector2 worldPos)
     {
-        return Generated_GenerationStatics.SampleDunes(worldPos.x, worldPos.y); //Instance.GenerationAsset.SampleGraphAtPos(worldPos.x, worldPos.y);
+        return Instance.GenerationAsset.SampleGraphAtPos(worldPos.x, worldPos.y);
     }
 
     public void Editor_GenerateSingleChunk(int seed)
@@ -55,7 +55,7 @@ public class ProceduralGenerationManager : MonoBehaviour
 
         EditorChunk = Instantiate(ChunkPrefab, Vector2.zero, Quaternion.identity, ChunksHolder.transform);
 
-        EditorChunk.CreateMeshAndOverrideMaterial(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(ChunkSize, GenerationAsset, seed, Offset, Vector2.zero), LOD), RenderMaterial);
+        EditorChunk.CreateMeshAndOverrideMaterial(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(ChunkSize, GenerationAsset, seed, Offset, Vector2.zero), LOD, ChunkSize), RenderMaterial);
     }
 
     //public void Editor_GenerateSingleChunk(int seed)
@@ -78,7 +78,7 @@ public class ProceduralGenerationManager : MonoBehaviour
     public void GenerateChunk(Vector2 chunkPos)
     {
         Chunk currentChunk = Instantiate(ChunkPrefab, chunkPos, Quaternion.identity, ChunksHolder.transform);
-        currentChunk.CreateMesh(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(ChunkSize, GenerationAsset, internSeed, Offset, Vector2.zero), LOD));
+        currentChunk.CreateMesh(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(ChunkSize, GenerationAsset, internSeed, Offset, Vector2.zero), LOD, ChunkSize));
     }
 
     private void OnValidate()
@@ -97,7 +97,7 @@ public class ProceduralGenerationManager : MonoBehaviour
             CookGraph(internSeed);
             foreach (KeyValuePair<Vector2Int, RuntimeTerrainGenerator.ChunkData> ChunkData in RuntimeGenerator.ChunksData)
             {
-                ChunkData.Value.Chunk.CreateMesh(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(ChunkSize, GenerationAsset, internSeed, Offset, Vector2.zero), LOD));
+                ChunkData.Value.Chunk.CreateMesh(MeshGenerator.GenerateMesh(Noise.GenerateNoiseMap(ChunkSize, GenerationAsset, internSeed, Offset, Vector2.zero), LOD, ChunkSize));
             }
         }
     }
@@ -158,11 +158,11 @@ public class ProceduralGenerationManager : MonoBehaviour
 
 public static class MeshGenerator
 {
-    public static MeshData GenerateMesh(float[,] heightMap, int LOD)
+    public static MeshData GenerateMesh(float[,] heightMap, int LOD, int size = 241)
     {
         int simplification = LOD <= 0 ? 1 : LOD * 2;
 
-        int chunkSize = ProceduralGenerationManager.Instance.ChunkSize;
+        int chunkSize = size;
 
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
@@ -173,22 +173,22 @@ public static class MeshGenerator
         float topLeftZ = 0; //(chunkSize - 1) / 2f;
 
         MeshData meshData = new MeshData(verticesPerLine, verticesPerLine);
-        int vertexIndex = 0;
+        int quadIndex = 0;
 
         for (int y = 0; y < chunkSize; y += simplification)
         {
             for (int x = 0; x < chunkSize; x += simplification)
             {
-                meshData.Vertices[vertexIndex] = new Vector3(topLeftX + x, heightMap[x, y], topLeftZ + y);
-                meshData.UVs[vertexIndex] = new Vector2(x / (float)width, y / (float)height);
+                meshData.Vertices[quadIndex] = new Vector3(topLeftX + x, heightMap[x, y], topLeftZ + y);
+                meshData.UVs[quadIndex] = new Vector2(x / (float)width, y / (float)height);
 
                 if (x < chunkSize - 1 && y < chunkSize - 1)
                 {
-                    meshData.CreateTriangle(vertexIndex, vertexIndex + verticesPerLine, vertexIndex + verticesPerLine + 1);
-                    meshData.CreateTriangle(vertexIndex + verticesPerLine + 1, vertexIndex + 1, vertexIndex);
+                    meshData.CreateTriangle(quadIndex, quadIndex + verticesPerLine, quadIndex + verticesPerLine + 1);
+                    meshData.CreateTriangle(quadIndex + verticesPerLine + 1, quadIndex + 1, quadIndex);
                 }
 
-                vertexIndex++;
+                quadIndex++;
             }
         }
 
