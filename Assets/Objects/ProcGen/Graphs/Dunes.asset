@@ -14,18 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nodes:
   - rid: 2989802405340381536
-  - rid: 2989802405340381537
-  - rid: 2989802405340381542
   - rid: 2989802405340381550
-  - rid: 2989802405340381866
-  - rid: 2989802405340381877
-  - rid: 2989802405340382068
-  - rid: 2989802412295061588
-  - rid: 2989802412295062051
+  - rid: 2989802414933016858
+  - rid: 2989802414933016865
+  - rid: 2989802414933016903
+  - rid: 2989802414933016914
   OutputNode:
     ID: 696b7a3c-d0bb-471b-abbb-9f6747c32943
     InputIDs:
-    - 3c975fe8-9911-4c06-9643-4965c025decd
+    - 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
     Position:
       serializedVersion: 2
       x: 0
@@ -35,52 +32,34 @@ MonoBehaviour:
     GraphAssetReference: {fileID: 11400000}
   Connections:
   - In:
-      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
-      PortIndex: 1
-    Out:
-      NodeId: be14ad9e-25f9-4494-b246-b25a0b25cec3
-      PortIndex: 0
-  - In:
-      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
-      PortIndex: 2
-    Out:
-      NodeId: ff4dd580-c9e0-4775-a145-9d73d6597a95
-      PortIndex: 0
-  - In:
-      NodeId: ba4812c2-a1c3-4744-98fb-f69105bdfa15
-      PortIndex: 1
-    Out:
-      NodeId: 387d663a-fee6-4503-8c59-b09ee5b9e5ff
-      PortIndex: 0
-  - In:
-      NodeId: 3c975fe8-9911-4c06-9643-4965c025decd
-      PortIndex: 2
-    Out:
-      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
-      PortIndex: 0
-  - In:
       NodeId: 696b7a3c-d0bb-471b-abbb-9f6747c32943
       PortIndex: 0
     Out:
-      NodeId: 3c975fe8-9911-4c06-9643-4965c025decd
+      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
       PortIndex: 0
   - In:
-      NodeId: 35943ebe-6848-43a7-b6d0-d6e6e3b01f07
-      PortIndex: 1
-    Out:
-      NodeId: 85f565c2-effd-439b-b3c6-4ac09072fa06
-      PortIndex: 0
-  - In:
-      NodeId: 35943ebe-6848-43a7-b6d0-d6e6e3b01f07
+      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
       PortIndex: 2
     Out:
-      NodeId: ba4812c2-a1c3-4744-98fb-f69105bdfa15
+      NodeId: 26661f5e-7bd3-4098-a608-d3d63c1fe0b7
       PortIndex: 0
   - In:
-      NodeId: 3c975fe8-9911-4c06-9643-4965c025decd
+      NodeId: 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
+      PortIndex: 2
+    Out:
+      NodeId: b5af9345-7205-4752-879b-b09fd85a8846
+      PortIndex: 0
+  - In:
+      NodeId: 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
       PortIndex: 1
     Out:
-      NodeId: 35943ebe-6848-43a7-b6d0-d6e6e3b01f07
+      NodeId: 081ea543-0cf4-4c32-8e6b-1a2e1948cfc6
+      PortIndex: 0
+  - In:
+      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
+      PortIndex: 1
+    Out:
+      NodeId: 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
       PortIndex: 0
   OnGraphCooked:
     m_PersistentCalls:
@@ -93,7 +72,7 @@ MonoBehaviour:
       data:
         ID: 696b7a3c-d0bb-471b-abbb-9f6747c32943
         InputIDs:
-        - 3c975fe8-9911-4c06-9643-4965c025decd
+        - 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
         Position:
           serializedVersion: 2
           x: 0
@@ -102,143 +81,106 @@ MonoBehaviour:
           height: 0
         GraphAssetReference: {fileID: 11400000}
         Input: 0
-    - rid: 2989802405340381537
-      type: {class: Perlin, ns: PGG, asm: PGG}
-      data:
-        ID: be14ad9e-25f9-4494-b246-b25a0b25cec3
-        InputIDs: []
-        Position:
-          serializedVersion: 2
-          x: -725
-          y: -97
-          width: 241
-          height: 194
-        GraphAssetReference: {fileID: 11400000}
-        _noise:
-          rid: 2989802412295062067
-        Frequency: 0.003
-        Amplitude: 200
-        Offset: {x: 0, y: 0}
-        Seed: 1337
-    - rid: 2989802405340381542
-      type: {class: Perlin, ns: PGG, asm: PGG}
-      data:
-        ID: ff4dd580-c9e0-4775-a145-9d73d6597a95
-        InputIDs: []
-        Position:
-          serializedVersion: 2
-          x: -742
-          y: 190
-          width: 241
-          height: 194
-        GraphAssetReference: {fileID: 11400000}
-        _noise:
-          rid: 2989802412295062068
-        Frequency: 0.01
-        Amplitude: 30
-        Offset: {x: 0, y: 0}
-        Seed: 1337
     - rid: 2989802405340381550
       type: {class: AddNode, ns: PGG, asm: PGG}
       data:
         ID: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
         InputIDs:
-        - be14ad9e-25f9-4494-b246-b25a0b25cec3
-        - ff4dd580-c9e0-4775-a145-9d73d6597a95
+        - 26661f5e-7bd3-4098-a608-d3d63c1fe0b7
+        - 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
         Position:
           serializedVersion: 2
-          x: -348
-          y: 24
-          width: 96
-          height: 166
+          x: -338.6667
+          y: 60
+          width: 74.66669
+          height: 168
         GraphAssetReference: {fileID: 11400000}
         A: 0
         B: 0
-    - rid: 2989802405340381866
-      type: {class: MultNode, ns: PGG, asm: PGG}
+    - rid: 2989802414933016858
+      type: {class: FractalPerlin, ns: PGG, asm: PGG}
       data:
-        ID: 3c975fe8-9911-4c06-9643-4965c025decd
-        InputIDs:
-        - 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
-        - 35943ebe-6848-43a7-b6d0-d6e6e3b01f07
+        ID: b5af9345-7205-4752-879b-b09fd85a8846
+        InputIDs: []
         Position:
           serializedVersion: 2
-          x: -173.33333
-          y: 19.333332
+          x: -805.3333
+          y: -80.66667
+          width: 245.33331
+          height: 281.33334
+        GraphAssetReference: {fileID: 11400000}
+        _noise:
+          rid: 7433113165740900469
+        Frequency: 0.005
+        Amplitude: 10
+        Offset: {x: 0, y: 0}
+        Seed: 1337
+        FractalType: 0
+        Octaves: 3
+        Gain: 0.5
+        Lacunarity: 2
+    - rid: 2989802414933016865
+      type: {class: Simplex, ns: PGG, asm: PGG}
+      data:
+        ID: 26661f5e-7bd3-4098-a608-d3d63c1fe0b7
+        InputIDs: []
+        Position:
+          serializedVersion: 2
+          x: -795.3333
+          y: 228
+          width: 245.33331
+          height: 200
+        GraphAssetReference: {fileID: 11400000}
+        _noise:
+          rid: 7433113165740900470
+        Frequency: 0.001
+        Amplitude: 100
+        Offset: {x: 7.2, y: 8.1}
+        Seed: 1337
+    - rid: 2989802414933016903
+      type: {class: MultNode, ns: PGG, asm: PGG}
+      data:
+        ID: 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
+        InputIDs:
+        - b5af9345-7205-4752-879b-b09fd85a8846
+        - 081ea543-0cf4-4c32-8e6b-1a2e1948cfc6
+        Position:
+          serializedVersion: 2
+          x: -407.33334
+          y: -199.33333
           width: 92
           height: 168
         GraphAssetReference: {fileID: 11400000}
         A: 1
         B: 1
-    - rid: 2989802405340381877
-      type: {class: Voronoi, ns: PGG, asm: PGG}
+    - rid: 2989802414933016914
+      type: {class: FractalPerlin, ns: PGG, asm: PGG}
       data:
-        ID: 387d663a-fee6-4503-8c59-b09ee5b9e5ff
+        ID: 081ea543-0cf4-4c32-8e6b-1a2e1948cfc6
         InputIDs: []
         Position:
           serializedVersion: 2
-          x: -556
-          y: -427.33334
+          x: -755.3333
+          y: -419.33334
           width: 245.33334
-          height: 242.66667
+          height: 281.33334
         GraphAssetReference: {fileID: 11400000}
         _noise:
-          rid: 2989802412295062069
-        Frequency: 0.002
-        Amplitude: 1
+          rid: 7433113165740900471
+        Frequency: 0.005
+        Amplitude: 10
         Offset: {x: 0, y: 0}
         Seed: 1337
-        DistanceFunction: 0
-        ReturnType: 2
-    - rid: 2989802405340382068
-      type: {class: OneMinus, ns: PGG, asm: PGG}
-      data:
-        ID: ba4812c2-a1c3-4744-98fb-f69105bdfa15
-        InputIDs:
-        - 387d663a-fee6-4503-8c59-b09ee5b9e5ff
-        Position:
-          serializedVersion: 2
-          x: -200
-          y: -168.66667
-          width: 108.00001
-          height: 144
-        GraphAssetReference: {fileID: 11400000}
-        Input: 0
-    - rid: 2989802412295061588
-      type: {class: ValueNode, ns: PGG, asm: PGG}
-      data:
-        ID: 85f565c2-effd-439b-b3c6-4ac09072fa06
-        InputIDs: []
-        Position:
-          serializedVersion: 2
-          x: -120.66667
-          y: -408
-          width: 110
-          height: 144
-        GraphAssetReference: {fileID: 11400000}
-        Value: 10
-    - rid: 2989802412295062051
-      type: {class: AddNode, ns: PGG, asm: PGG}
-      data:
-        ID: 35943ebe-6848-43a7-b6d0-d6e6e3b01f07
-        InputIDs:
-        - 85f565c2-effd-439b-b3c6-4ac09072fa06
-        - ba4812c2-a1c3-4744-98fb-f69105bdfa15
-        Position:
-          serializedVersion: 2
-          x: 97.366745
-          y: -219.2667
-          width: 0
-          height: 0
-        GraphAssetReference: {fileID: 11400000}
-        A: 0
-        B: 0
-    - rid: 2989802412295062067
+        FractalType: 0
+        Octaves: 3
+        Gain: -0.57
+        Lacunarity: 1.28
+    - rid: 7433113165740900469
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 
-    - rid: 2989802412295062068
+    - rid: 7433113165740900470
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 
-    - rid: 2989802412295062069
+    - rid: 7433113165740900471
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 

@@ -124,7 +124,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Blend: 0.933
+    - _Blend: 1
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -133,6 +133,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DiffusePower: 0.35
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -141,7 +142,7 @@ Material:
     - _GlossyReflections: 0
     - _LIGHTLAYERS: 0
     - _LIGHT_LAYERS: 0
-    - _Metalic: 0.057
+    - _Metalic: 0.012
     - _Metallic: 0
     - _NormalStrength: 0.26
     - _OcclusionStrength: 1
@@ -150,9 +151,9 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShadowChaos: 0
-    - _ShadowNoise: 0.39
-    - _ShadowNoiseScale: 147.75
-    - _ShadowSoft: 0.1
+    - _ShadowNoise: 0.113
+    - _ShadowNoiseScale: 31.5
+    - _ShadowSoft: -0.6
     - _Smoothness: 0.175
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -168,7 +169,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseTiling: {r: 1000, g: 1000, b: 0, a: 0}
-    - _ShadowColor: {r: 0.12895316, g: 0.09077961, b: 0.22641507, a: 0}
+    - _ShadowColor: {r: 0, g: 0.17444706, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

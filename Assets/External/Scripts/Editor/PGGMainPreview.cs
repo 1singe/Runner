@@ -43,14 +43,9 @@ namespace PGG.Editor
 
             Add(listView);
 
-            //_viewer.style.flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row);
             _viewer.style.flexShrink = 1;
             _viewer.style.flexGrow = 1;
             _viewer.pickingMode = PickingMode.Ignore;
-            //_viewer.style.alignSelf = new StyleEnum<Align>(Align.Stretch);
-            //_viewer.style.alignContent = new StyleEnum<Align>(Align.Stretch);
-            //_viewer.style.alignItems = new StyleEnum<Align>(Align.Stretch);
-            //_viewer.style.justifyContent = new StyleEnum<Justify>(Justify.FlexEnd);
             _viewer.style.maxHeight = new StyleLength(new Length(50f, LengthUnit.Percent));
 
             Button reloadButton = new Button(() => _window._currentGraph.OnGraphCooked.Invoke());
@@ -61,9 +56,18 @@ namespace PGG.Editor
             reloadButton.style.height = 30f;
             reloadButton.style.width = new StyleLength(new Length(100f, LengthUnit.Percent));
 
+            Button bakeButton = new Button(() => _window._currentGraph.Bake());
+            bakeButton.text = "Bake";
+            bakeButton.style.alignSelf = new StyleEnum<Align>(Align.FlexEnd);
+            bakeButton.style.alignContent = new StyleEnum<Align>(Align.Stretch);
+            bakeButton.style.alignItems = new StyleEnum<Align>(Align.Stretch);
+            bakeButton.style.height = 30f;
+            bakeButton.style.width = new StyleLength(new Length(100f, LengthUnit.Percent));
+
 
             listView.Add(_viewer);
             listView.Add(reloadButton);
+            listView.Add(bakeButton);
         }
     }
 }

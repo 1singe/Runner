@@ -68,6 +68,8 @@ namespace PGG
 
             _indent = 0;
 
+            UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation();
+
             return filePath != "";
         }
 

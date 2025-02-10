@@ -66,8 +66,6 @@ namespace PGG.Editor
         private void OnSave()
         {
             SaveChanges();
-            _currentGraph.Bake();
-            UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation();
         }
 
 
