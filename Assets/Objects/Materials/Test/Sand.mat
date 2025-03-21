@@ -34,7 +34,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _ShadowSoft
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -133,7 +133,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffusePower: 0.35
+    - _DiffusePower: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -151,9 +151,9 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShadowChaos: 0
-    - _ShadowNoise: 0.113
-    - _ShadowNoiseScale: 31.5
-    - _ShadowSoft: -0.6
+    - _ShadowNoise: 0.711
+    - _ShadowNoiseScale: 1
+    - _ShadowSoft: 0
     - _Smoothness: 0.175
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -169,7 +169,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseTiling: {r: 1000, g: 1000, b: 0, a: 0}
-    - _ShadowColor: {r: 0, g: 0.17444706, b: 1, a: 1}
+    - _ShadowColor: {r: 0.25684133, g: 0.15917587, b: 0.6886792, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

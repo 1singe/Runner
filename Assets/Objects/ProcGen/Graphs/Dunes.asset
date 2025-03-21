@@ -16,13 +16,13 @@ MonoBehaviour:
   - rid: 2989802405340381536
   - rid: 2989802405340381550
   - rid: 2989802414933016858
-  - rid: 2989802414933016865
   - rid: 2989802414933016903
   - rid: 2989802414933016914
+  - rid: 7433113411573514842
   OutputNode:
     ID: 696b7a3c-d0bb-471b-abbb-9f6747c32943
     InputIDs:
-    - 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
+    - 41ca9be1-a7a4-49a0-a497-88e54af3b81d
     Position:
       serializedVersion: 2
       x: 0
@@ -31,18 +31,6 @@ MonoBehaviour:
       height: 0
     GraphAssetReference: {fileID: 11400000}
   Connections:
-  - In:
-      NodeId: 696b7a3c-d0bb-471b-abbb-9f6747c32943
-      PortIndex: 0
-    Out:
-      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
-      PortIndex: 0
-  - In:
-      NodeId: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
-      PortIndex: 2
-    Out:
-      NodeId: 26661f5e-7bd3-4098-a608-d3d63c1fe0b7
-      PortIndex: 0
   - In:
       NodeId: 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
       PortIndex: 2
@@ -61,6 +49,12 @@ MonoBehaviour:
     Out:
       NodeId: 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
       PortIndex: 0
+  - In:
+      NodeId: 696b7a3c-d0bb-471b-abbb-9f6747c32943
+      PortIndex: 0
+    Out:
+      NodeId: 41ca9be1-a7a4-49a0-a497-88e54af3b81d
+      PortIndex: 0
   OnGraphCooked:
     m_PersistentCalls:
       m_Calls: []
@@ -72,7 +66,7 @@ MonoBehaviour:
       data:
         ID: 696b7a3c-d0bb-471b-abbb-9f6747c32943
         InputIDs:
-        - 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
+        - 41ca9be1-a7a4-49a0-a497-88e54af3b81d
         Position:
           serializedVersion: 2
           x: 0
@@ -86,7 +80,6 @@ MonoBehaviour:
       data:
         ID: 9f5d2e6d-8bae-41cc-bcb1-6a1309c4c9df
         InputIDs:
-        - 26661f5e-7bd3-4098-a608-d3d63c1fe0b7
         - 1ce39bc5-c4c3-41b8-a95b-a0ec5d14cfae
         Position:
           serializedVersion: 2
@@ -110,7 +103,7 @@ MonoBehaviour:
           height: 281.33334
         GraphAssetReference: {fileID: 11400000}
         _noise:
-          rid: 7433113165740900469
+          rid: 7433113411573514922
         Frequency: 0.005
         Amplitude: 10
         Offset: {x: 0, y: 0}
@@ -119,24 +112,6 @@ MonoBehaviour:
         Octaves: 3
         Gain: 0.5
         Lacunarity: 2
-    - rid: 2989802414933016865
-      type: {class: Simplex, ns: PGG, asm: PGG}
-      data:
-        ID: 26661f5e-7bd3-4098-a608-d3d63c1fe0b7
-        InputIDs: []
-        Position:
-          serializedVersion: 2
-          x: -795.3333
-          y: 228
-          width: 245.33331
-          height: 200
-        GraphAssetReference: {fileID: 11400000}
-        _noise:
-          rid: 7433113165740900470
-        Frequency: 0.001
-        Amplitude: 100
-        Offset: {x: 7.2, y: 8.1}
-        Seed: 1337
     - rid: 2989802414933016903
       type: {class: MultNode, ns: PGG, asm: PGG}
       data:
@@ -166,7 +141,7 @@ MonoBehaviour:
           height: 281.33334
         GraphAssetReference: {fileID: 11400000}
         _noise:
-          rid: 7433113165740900471
+          rid: 7433113411573514923
         Frequency: 0.005
         Amplitude: 10
         Offset: {x: 0, y: 0}
@@ -175,12 +150,30 @@ MonoBehaviour:
         Octaves: 3
         Gain: -0.57
         Lacunarity: 1.28
-    - rid: 7433113165740900469
+    - rid: 7433113411573514842
+      type: {class: Perlin, ns: PGG, asm: PGG}
+      data:
+        ID: 41ca9be1-a7a4-49a0-a497-88e54af3b81d
+        InputIDs: []
+        Position:
+          serializedVersion: 2
+          x: -407
+          y: 223
+          width: 241
+          height: 194
+        GraphAssetReference: {fileID: 11400000}
+        _noise:
+          rid: 7433113411573514924
+        Frequency: 0.013
+        Amplitude: 20
+        Offset: {x: 0, y: 0}
+        Seed: 1337
+    - rid: 7433113411573514922
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 
-    - rid: 7433113165740900470
+    - rid: 7433113411573514923
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 
-    - rid: 7433113165740900471
+    - rid: 7433113411573514924
       type: {class: FastNoise, ns: , asm: PGG.Common}
       data: 

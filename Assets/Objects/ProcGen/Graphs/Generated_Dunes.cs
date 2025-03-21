@@ -1,55 +1,54 @@
 public partial struct Generated_GenerationStatics
 {
-	private static readonly FastNoise Noiseb5af9345_7205_4752_879b_b09fd85a8846 = InitNoiseb5af9345_7205_4752_879b_b09fd85a8846();
+	private static readonly FastNoise Noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4 = InitNoise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4();
 	
-	public static FastNoise InitNoiseb5af9345_7205_4752_879b_b09fd85a8846()
+	public static FastNoise InitNoise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4()
 	{
-		FastNoise noiseb5af9345_7205_4752_879b_b09fd85a8846= new FastNoise();
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetFrequency(0.005f);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetSeed(1337);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetNoiseType(FastNoise.NoiseType.Perlin);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetFractalType(FastNoise.FractalType.FBM);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetFractalGain(0.5f);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetFractalLacunarity(2f);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetFractalOctaves(3);
-		noiseb5af9345_7205_4752_879b_b09fd85a8846.SetNoiseType(FastNoise.NoiseType.PerlinFractal);
+		FastNoise noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4= new FastNoise();
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetFrequency(0.005f);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetSeed(1337);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetNoiseType(FastNoise.NoiseType.Perlin);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetFractalType(FastNoise.FractalType.FBM);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetFractalGain(0.5f);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetFractalLacunarity(2f);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetFractalOctaves(3);
+		noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4.SetNoiseType(FastNoise.NoiseType.PerlinFractal);
 		
-		return noiseb5af9345_7205_4752_879b_b09fd85a8846;
+		return noise72f7d1c9_7fb2_4608_9e8e_aa9df6b342c4;
 	}
 	
-	private static readonly FastNoise Noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7 = InitNoise26661f5e_7bd3_4098_a608_d3d63c1fe0b7();
+	private static readonly FastNoise Noise34a39279_8e27_4821_bcb1_4f7cc020c5ef = InitNoise34a39279_8e27_4821_bcb1_4f7cc020c5ef();
 	
-	public static FastNoise InitNoise26661f5e_7bd3_4098_a608_d3d63c1fe0b7()
+	public static FastNoise InitNoise34a39279_8e27_4821_bcb1_4f7cc020c5ef()
 	{
-		FastNoise noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7= new FastNoise();
-		noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7.SetFrequency(0.001f);
-		noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7.SetSeed(1337);
-		noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7.SetNoiseType(FastNoise.NoiseType.Perlin);
-		noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7.SetNoiseType(FastNoise.NoiseType.Simplex);
+		FastNoise noise34a39279_8e27_4821_bcb1_4f7cc020c5ef= new FastNoise();
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetFrequency(0.005f);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetSeed(1337);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetNoiseType(FastNoise.NoiseType.Perlin);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetFractalType(FastNoise.FractalType.FBM);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetFractalGain(-0.57f);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetFractalLacunarity(1.28f);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetFractalOctaves(3);
+		noise34a39279_8e27_4821_bcb1_4f7cc020c5ef.SetNoiseType(FastNoise.NoiseType.PerlinFractal);
 		
-		return noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7;
+		return noise34a39279_8e27_4821_bcb1_4f7cc020c5ef;
 	}
 	
-	private static readonly FastNoise Noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6 = InitNoise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6();
+	private static readonly FastNoise Noise41ca9be1_a7a4_49a0_a497_88e54af3b81d = InitNoise41ca9be1_a7a4_49a0_a497_88e54af3b81d();
 	
-	public static FastNoise InitNoise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6()
+	public static FastNoise InitNoise41ca9be1_a7a4_49a0_a497_88e54af3b81d()
 	{
-		FastNoise noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6= new FastNoise();
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetFrequency(0.005f);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetSeed(1337);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetNoiseType(FastNoise.NoiseType.Perlin);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetFractalType(FastNoise.FractalType.FBM);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetFractalGain(-0.57f);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetFractalLacunarity(1.28f);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetFractalOctaves(3);
-		noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.SetNoiseType(FastNoise.NoiseType.PerlinFractal);
+		FastNoise noise41ca9be1_a7a4_49a0_a497_88e54af3b81d= new FastNoise();
+		noise41ca9be1_a7a4_49a0_a497_88e54af3b81d.SetFrequency(0.013f);
+		noise41ca9be1_a7a4_49a0_a497_88e54af3b81d.SetSeed(1337);
+		noise41ca9be1_a7a4_49a0_a497_88e54af3b81d.SetNoiseType(FastNoise.NoiseType.Perlin);
 		
-		return noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6;
+		return noise41ca9be1_a7a4_49a0_a497_88e54af3b81d;
 	}
 	
 	public static float SampleDunes(float x, float y)
 	{
-		return (Noise26661f5e_7bd3_4098_a608_d3d63c1fe0b7.GetNoise(x + 0f, y + 0f) * 100f + (Noiseb5af9345_7205_4752_879b_b09fd85a8846.GetNoise(x + 0f, y + 0f) * 10f * Noise081ea543_0cf4_4c32_8e6b_1a2e1948cfc6.GetNoise(x + 0f, y + 0f) * 10f));
+		return Noise41ca9be1_a7a4_49a0_a497_88e54af3b81d.GetNoise(x + 0f, y + 0f) * 20f;
 	}
 	
 }

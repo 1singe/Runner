@@ -13,12 +13,6 @@ public class BiomeLookup
         temperatureNoise.SetFrequency(0.005f);
         temperatureNoise.SetSeed(1337);
         temperatureNoise.SetNoiseType(FastNoise.NoiseType.Perlin);
-        temperatureNoise.SetFractalType(FastNoise.FractalType.FBM);
-        temperatureNoise.SetFractalGain(-0.57f);
-        temperatureNoise.SetFractalLacunarity(1.28f);
-        temperatureNoise.SetFractalOctaves(3);
-        temperatureNoise.SetNoiseType(FastNoise.NoiseType.PerlinFractal);
-
         return temperatureNoise;
     }
 
@@ -47,12 +41,6 @@ public class BiomeLookup
         humidityNoise.SetFrequency(0.005f);
         humidityNoise.SetSeed(1337);
         humidityNoise.SetNoiseType(FastNoise.NoiseType.Perlin);
-        humidityNoise.SetFractalType(FastNoise.FractalType.FBM);
-        humidityNoise.SetFractalGain(-0.57f);
-        humidityNoise.SetFractalLacunarity(1.28f);
-        humidityNoise.SetFractalOctaves(3);
-        humidityNoise.SetNoiseType(FastNoise.NoiseType.PerlinFractal);
-
         return humidityNoise;
     }
 
