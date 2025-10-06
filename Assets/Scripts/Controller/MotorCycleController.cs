@@ -1,8 +1,12 @@
 using System;
+using System.Numerics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 
 public class MotorCycleController : MonoBehaviour
@@ -34,7 +38,7 @@ public class MotorCycleController : MonoBehaviour
     private Rigidbody _rigidbody;
 
     private InputAction _accelerateAction;
-    private InputAction _breakAction;
+    private InputAction _brakeAction;
     private InputAction _moveAction;
     private InGameControls _controls;
 
@@ -44,6 +48,9 @@ public class MotorCycleController : MonoBehaviour
 
     private Vector3 m_GoalVelocity;
     private Vector3 m_UnitGoal;
+
+    private float m_SteeringGoal;
+    private float m_ForwardGoal;
 
     public AnimationCurve AccelerationFactorFromDot;
 
@@ -63,6 +70,7 @@ public class MotorCycleController : MonoBehaviour
     private ParticleSystem.MainModule DustMain;
 
     private float groundDist = 1f;
+    private float groundSignedDist = 1f;
     public AnimationCurve DustCurve;
     private Vector3 groundProjection;
 
@@ -72,10 +80,10 @@ public class MotorCycleController : MonoBehaviour
         _controls = new InGameControls();
         _accelerateAction = _controls.Player.Accelerate;
         _moveAction = _controls.Player.Move;
-        _breakAction = _controls.Player.Break;
+        _brakeAction = _controls.Player.Brake;
 
         _accelerateAction.performed += OnAccelerateActionPerformed;
-        _breakAction.performed += OnBreakActionPerformed;
+        _brakeAction.performed += OnBrakeActionPerformed;
     }
 
     private void Start()
@@ -84,7 +92,7 @@ public class MotorCycleController : MonoBehaviour
         DustEmission = DustParticles.emission;
     }
 
-    private void OnBreakActionPerformed(InputAction.CallbackContext obj)
+    private void OnBrakeActionPerformed(InputAction.CallbackContext obj)
     {
         _braking = obj.performed;
     }
@@ -98,14 +106,14 @@ public class MotorCycleController : MonoBehaviour
     {
         _accelerateAction.Enable();
         _moveAction.Enable();
-        _breakAction.Enable();
+        _brakeAction.Enable();
     }
 
     private void OnDisable()
     {
         _accelerateAction.Disable();
         _moveAction.Disable();
-        _breakAction.Disable();
+        _brakeAction.Disable();
     }
 
 
@@ -121,33 +129,37 @@ public class MotorCycleController : MonoBehaviour
         float horizontalVelocity = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z).sqrMagnitude;
         int Amount = (int)Mathf.Lerp(horizontalVelocity, 0f, DustCurve.Evaluate(Mathf.Clamp(groundDist, 0f, DustDistanceMAx) / DustDistanceMAx));
         DustEmission.rateOverTime = new ParticleSystem.MinMaxCurve(Amount * 10f);
-        //DustEmission.SetBurst(0, new ParticleSystem.Burst(0, Amount * 0.5f, Amount, 0.05f));
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        #region Hovering
+        
         float halfChunkSize = (ProceduralGenerationManager.Instance.ChunkSize - 1) / 2f;
 
         float samplePosX = transform.position.x;
         float samplePosY = transform.position.z;
-        float groundHeight = Generated_GenerationStatics.SampleDunes(samplePosX, samplePosY);
-
-        groundDist = Mathf.Max(transform.position.y - groundHeight, 0);
-        groundProjection = new Vector3(transform.position.x, groundHeight, transform.position.z);
-
+        
+        RaycastHit hit;
+        float groundHeight;
+        Vector3 Normal;
+        int layerMask = 1 << 6;
         Vector3 WantedUp = Vector3.up;
 
-        #region Hovering
-
-        if (transform.position.y <= groundHeight + ThrusterLength)
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, ThrusterLength, layerMask))
         {
-            var Velocity = _rigidbody.linearVelocity;
-
-            // Calculate the normal of the noise
-            // We find 3 points very close from eachother, and get the normal of the plan they form
+            groundHeight = hit.point.y;
+            Normal = hit.normal;
+        }
+        else
+        {
+            groundHeight = Generated_GenerationStatics.SampleDunes(samplePosX, samplePosY);
             int sampleCount = 3;
             float[] adjacentGroundHeights = new float[sampleCount];
+                
+            // Calculate the normal of the noise
+            // We find 3 points very close from eachother, and get the normal of the plan they form
 
             // Center
             Vector2 aXY = new Vector2(samplePosX + sampleDistance, samplePosY); // 0 deg
@@ -167,14 +179,26 @@ public class MotorCycleController : MonoBehaviour
             Debug.DrawRay(c, Vector3.up * 0.01f, Color.green);
 
             // Find the normal with Cross Product
-
-            Vector3 Normal = Vector3.Cross(c - b, c - a);
+            Normal = Vector3.Cross(c - b, c - a);
+        }
+        
+        if (transform.position.y <= groundHeight + ThrusterLength)
+        {
+            var Velocity = _rigidbody.linearVelocity;
+            
+            groundSignedDist = transform.position.y - groundHeight;
+            groundDist = Mathf.Max(groundDist, 0);
+            groundProjection = new Vector3(transform.position.x, groundHeight, transform.position.z);
+            
+            Debug.DrawRay(transform.position + Vector3.up * 20f,  Vector3.down * 1000f, Color.red);
+            // If it hits a collider, use this info for Hovering !
+            
             Normal.Normalize();
             WantedUp = Normal;
-
+            
             Debug.DrawRay(new Vector3(transform.position.x, groundHeight, transform.position.z), Normal.normalized * 1f, Color.blue);
 
-            float x = transform.position.y - groundHeight - IdealHeight;
+            float x = groundSignedDist - IdealHeight;
 
             float spring = (x * ThrusterForce) - (x * ThrusterDamping);
 
@@ -186,7 +210,6 @@ public class MotorCycleController : MonoBehaviour
         #region Input
 
         _moveVector = _moveAction.ReadValue<Vector2>();
-//Input Process{
         if (_moveVector.magnitude > 1.0f)
         {
             _moveVector.Normalize();
@@ -196,7 +219,10 @@ public class MotorCycleController : MonoBehaviour
 
         #region Movement
 
-        m_UnitGoal = new Vector3(_moveVector.x, 0, _moveVector.y);
+        
+        // Steering --------------
+        m_ForwardGoal = _accelerateAction.ReadValue<float>();
+        m_UnitGoal = new Vector3(_moveVector.x, 0, m_ForwardGoal);
 
         Vector3 unitVelocity = m_GoalVelocity.normalized;
 
@@ -216,7 +242,7 @@ public class MotorCycleController : MonoBehaviour
 
         _rigidbody.AddForce(Vector3.Scale(neededAcceleration * _rigidbody.mass, ForceScale));
 
-        //Hard clamp for ground collsion
+        //Hard clamp for ground collision
 
         if (transform.position.y <= groundHeight)
         {
@@ -235,56 +261,5 @@ public class MotorCycleController : MonoBehaviour
 
         _rigidbody.AddTorque((rotAxis * (rotRadians * TorqueForce)) - (_rigidbody.angularVelocity * TorqueDamping));
     }
-
-
-    //if (transform.position.y <= groundHeight + ThrusterLength)
-    //{
-    //    grounded = true;
-    //    SpeedVector.y = Mathf.Max(SpeedVector.y, 0);
-    //}
-    /*
-    // Gravity
-    AccelerationVector += new Vector3(0, -9.8f, 0);
-
-    if (Input.GetKey(KeyCode.Z) && grounded)
-    {
-        AccelerationVector += new Vector3(0, 0, ForwardAcceleration);
-    }
-
-    SpeedVector += AccelerationVector * Time.deltaTime;
-
-
-    // Detect ground
-
-
-    if (transform.position.y <= groundHeight + GroundDetectionRadius)
-    {
-        grounded = true;
-        SpeedVector.y = Mathf.Max(SpeedVector.y, 0);
-    }
-    else
-    {
-        grounded = false;
-    }
-
-
-    transform.position += SpeedVector * Time.deltaTime;
-
-    if (grounded)
-    {
-        transform.position = new Vector3(transform.position.x, Mathf.Max(transform.position.y, groundHeight), transform.position.z);
-    }
-
-    // Damping the speed
-
-    // If grounded, apply base friction and terrain friction
-    if (grounded)
-        SpeedVector *= (1f - Friction);
-    else
-        SpeedVector *= (1f - AirResistance);
-
-    // At the very end, reset every acceleration vector
-
-    AccelerationVector = Vector3.zero;
-    */
+    
 }
